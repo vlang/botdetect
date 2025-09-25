@@ -27,7 +27,7 @@ pub fn ua_is_bot(ua string) bool {
 	return false
 }
 
-const bot_urls = [
+pub const bot_urls = [
 	'/admin.php',
 	'/login.php?s=Admin/login',
 	'/wp-content/plugins/',
