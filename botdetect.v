@@ -15,6 +15,9 @@ const bot_uas = [
 	'YouBot',
 	'AdsTxtCrawlerTP',
 	'AhrefsBot',
+	'SemrushBot',
+	'MJ12bot',
+	'Reflectionbot',
 	'Palo Alto Networks',
 ]
 
