@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      VTEST_FAIL_FAST: "1"
+      VJOBS: "4"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Setup V
+        id: setup_v
+        uses: vlang/setup-v@v1
+      - name: Vet
+        id: vet
+        if: ${{ success() && !cancelled() && steps.setup_v.outcome == 'success' }}
+        run: v vet .
+      - name: Test
+        id: test
+        if: ${{ success() && !cancelled() && steps.vet.outcome == 'success' }}
+        run: v test .
